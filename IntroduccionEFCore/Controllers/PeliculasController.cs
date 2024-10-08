@@ -22,11 +22,11 @@ namespace IntroduccionEFCore.Controllers
         public async Task<ActionResult> Post(PeliculaCreacionDTO peliculaCreacionDTO) 
         {
             var pelicula = mapper.Map<Pelicula>(peliculaCreacionDTO);
-            if (pelicula.Generos is not null) 
+            if (pelicula.Servicios is not null) 
             {
-                foreach (var genero in pelicula.Generos) 
+                foreach (var servicio in pelicula.Servicios) 
                 {
-                    context.Entry(genero).State = EntityState.Unchanged;//ESTO HAY QUE HACERLO porq estamos utilizando la configuracion de muchos a
+                    context.Entry(servicio).State = EntityState.Unchanged;//ESTO HAY QUE HACERLO porq estamos utilizando la configuracion de muchos a
                                                                         //muchos saltandnos la parte de control de la tabla intermedia
                 }
             }

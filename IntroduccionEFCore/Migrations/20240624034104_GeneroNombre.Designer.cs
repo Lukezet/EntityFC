@@ -24,7 +24,7 @@ namespace IntroduccionEFCore.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("IntroduccionEFCore.Entidades.Genero", b =>
+            modelBuilder.Entity("IntroduccionEFCore.Entidades.CategoriaGenero", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

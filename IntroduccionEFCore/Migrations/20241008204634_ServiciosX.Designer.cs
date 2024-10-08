@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IntroduccionEFCore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240707215835_CambioBD")]
-    partial class CambioBD
+    [Migration("20241008204634_ServiciosX")]
+    partial class ServiciosX
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,21 +24,6 @@ namespace IntroduccionEFCore.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("GeneroPelicula", b =>
-                {
-                    b.Property<int>("GenerosId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PeliculasId")
-                        .HasColumnType("int");
-
-                    b.HasKey("GenerosId", "PeliculasId");
-
-                    b.HasIndex("PeliculasId");
-
-                    b.ToTable("GeneroPelicula");
-                });
 
             modelBuilder.Entity("IntroduccionEFCore.Entidades.Actor", b =>
                 {
@@ -90,24 +75,6 @@ namespace IntroduccionEFCore.Migrations
                     b.ToTable("Comentarios");
                 });
 
-            modelBuilder.Entity("IntroduccionEFCore.Entidades.CategoriaServicio", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Generos");
-                });
-
             modelBuilder.Entity("IntroduccionEFCore.Entidades.Pelicula", b =>
                 {
                     b.Property<int>("Id")
@@ -155,19 +122,49 @@ namespace IntroduccionEFCore.Migrations
                     b.ToTable("PeliculasActores");
                 });
 
-            modelBuilder.Entity("GeneroPelicula", b =>
+            modelBuilder.Entity("IntroduccionEFCore.Entidades.Servicio", b =>
                 {
-                    b.HasOne("IntroduccionEFCore.Entidades.CategoriaServicio", null)
-                        .WithMany()
-                        .HasForeignKey("GenerosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.HasOne("IntroduccionEFCore.Entidades.Pelicula", null)
-                        .WithMany()
-                        .HasForeignKey("PeliculasId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Servicios");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 5,
+                            Nombre = "Ciencia Ficcion"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Nombre = "Animacion"
+                        });
+                });
+
+            modelBuilder.Entity("PeliculaServicio", b =>
+                {
+                    b.Property<int>("PeliculasId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiciosId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PeliculasId", "ServiciosId");
+
+                    b.HasIndex("ServiciosId");
+
+                    b.ToTable("PeliculaServicio");
                 });
 
             modelBuilder.Entity("IntroduccionEFCore.Entidades.Comentario", b =>
@@ -198,6 +195,21 @@ namespace IntroduccionEFCore.Migrations
                     b.Navigation("Actor");
 
                     b.Navigation("Pelicula");
+                });
+
+            modelBuilder.Entity("PeliculaServicio", b =>
+                {
+                    b.HasOne("IntroduccionEFCore.Entidades.Pelicula", null)
+                        .WithMany()
+                        .HasForeignKey("PeliculasId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("IntroduccionEFCore.Entidades.Servicio", null)
+                        .WithMany()
+                        .HasForeignKey("ServiciosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("IntroduccionEFCore.Entidades.Actor", b =>

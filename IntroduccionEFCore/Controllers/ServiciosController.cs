@@ -8,13 +8,13 @@ using Microsoft.EntityFrameworkCore;
 namespace IntroduccionEFCore.Controllers
 {
     [ApiController]
-    [Route("api/generos")]
-    public class GenerosController : ControllerBase
+    [Route("api/servicios")]
+    public class ServiciosController : ControllerBase
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
 
-        public GenerosController(ApplicationDbContext context,
+        public ServiciosController(ApplicationDbContext context,
             IMapper mapper)
         {
             this.context = context;
@@ -22,23 +22,23 @@ namespace IntroduccionEFCore.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(GeneroCreacionDTO generoCreacion) 
+        public async Task<ActionResult> Post(ServicioCreacionDTO servicioCreacion) 
         {
-            //var genero = new Genero //Esto comentado es la forma de mappear manual
+            //var servicio = new Servicio //Esto comentado es la forma de mappear manual
             //{
-            //    Nombre = generoCreacion.Nombre,
+            //    Nombre = servicioCreacion.Nombre,
             //};
-            var genero = mapper.Map<Genero>(generoCreacion);
-            context.Add(genero);
+            var servicio = mapper.Map<Servicio>(servicioCreacion);
+            context.Add(servicio);
             await context.SaveChangesAsync();
             return Ok();
         }
 
         [HttpPost("varios")]
-        public async Task<ActionResult> Post(GeneroCreacionDTO[] generosCreacionDTO)
+        public async Task<ActionResult> Post(ServicioCreacionDTO[] serviciosCreacionDTO)
         {
-            var generos = mapper.Map<Genero[]>(generosCreacionDTO);
-            context.AddRange(generos);
+            var servicios = mapper.Map<Servicio[]>(serviciosCreacionDTO);
+            context.AddRange(servicios);
             await context.SaveChangesAsync();
             return Ok();
 

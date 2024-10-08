@@ -2,7 +2,7 @@
 
 namespace IntroduccionEFCore.DTOs
 {
-    public class GeneroCreacionDTO
+    public class ServicioCreacionDTO
     {
         [StringLength(maximumLength: 150)]
         public string Nombre { get; set; } = null!;

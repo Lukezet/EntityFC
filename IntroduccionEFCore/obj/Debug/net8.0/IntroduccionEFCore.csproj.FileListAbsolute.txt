@@ -136,3 +136,4 @@ C:\Users\Lucas\source\repos\IntroduccionEFCore\IntroduccionEFCore\obj\Debug\net8
 C:\Users\Lucas\source\repos\IntroduccionEFCore\IntroduccionEFCore\obj\Debug\net8.0\ref\IntroduccionEFCore.dll
 C:\Users\Lucas\source\repos\IntroduccionEFCore\IntroduccionEFCore\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\Lucas\source\repos\IntroduccionEFCore\IntroduccionEFCore\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Lucas\source\repos\IntroduccionEFCore\IntroduccionEFCore\obj\Debug\net8.0\IntroduccionEFCore.sourcelink.json

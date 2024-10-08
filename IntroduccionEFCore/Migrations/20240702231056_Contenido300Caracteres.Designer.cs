@@ -70,7 +70,7 @@ namespace IntroduccionEFCore.Migrations
                     b.ToTable("Comentarios");
                 });
 
-            modelBuilder.Entity("IntroduccionEFCore.Entidades.Genero", b =>
+            modelBuilder.Entity("IntroduccionEFCore.Entidades.CategoriaServicio", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -85,7 +85,7 @@ namespace IntroduccionEFCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Generos");
+                    b.ToTable("Servicios");
                 });
 
             modelBuilder.Entity("IntroduccionEFCore.Entidades.Pelicula", b =>

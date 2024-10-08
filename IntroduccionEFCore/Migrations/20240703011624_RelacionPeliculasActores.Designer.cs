@@ -90,7 +90,7 @@ namespace IntroduccionEFCore.Migrations
                     b.ToTable("Comentarios");
                 });
 
-            modelBuilder.Entity("IntroduccionEFCore.Entidades.Genero", b =>
+            modelBuilder.Entity("IntroduccionEFCore.Entidades.CategoriaServicio", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -157,7 +157,7 @@ namespace IntroduccionEFCore.Migrations
 
             modelBuilder.Entity("GeneroPelicula", b =>
                 {
-                    b.HasOne("IntroduccionEFCore.Entidades.Genero", null)
+                    b.HasOne("IntroduccionEFCore.Entidades.CategoriaServicio", null)
                         .WithMany()
                         .HasForeignKey("GenerosId")
                         .OnDelete(DeleteBehavior.Cascade)
