@@ -25,9 +25,9 @@ namespace IntroduccionEFCore
             configurationBuilder.Properties<string>().HaveMaxLength(150);//PARA QUE POR DEFECTO LOS CAMPOS STRING SE VAN A CONFIGURAR 150
         }
         public DbSet<Servicio> Servicios => Set<Servicio>();
-        public DbSet<Actor> Actores => Set<Actor>();
-        public DbSet<Pelicula> Peliculas => Set<Pelicula>();
+        public DbSet<Profesional> Profesionales => Set<Profesional>();
+        public DbSet<Prestador> Prestadores => Set<Prestador>();
         public DbSet<Comentario> Comentarios => Set<Comentario>();
-        public DbSet<PeliculaActor> PeliculasActores => Set<PeliculaActor>();
+        public DbSet<PrestadorProfesional> PrestadoresProfesionales => Set<PrestadorProfesional>();
     }
 }

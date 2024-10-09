@@ -6,22 +6,22 @@ using Microsoft.AspNetCore.Mvc;
 namespace IntroduccionEFCore.Controllers
 {
     [ApiController]
-    [Route("api/Actores")]
-    public class ActoresController : ControllerBase
+    [Route("api/Profesionales")]
+    public class ProfesionalesController : ControllerBase
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
 
-        public ActoresController(ApplicationDbContext context,IMapper mapper) 
+        public ProfesionalesController(ApplicationDbContext context,IMapper mapper) 
         {
             this.context = context;
             this.mapper = mapper;
         }
         [HttpPost]
-        public async Task<ActionResult> Post(ActorCreacionDTO actorCreacionDTO) 
+        public async Task<ActionResult> Post(ProfesionalCreacionDTO profesionalCreacionDTO) 
         {
-            var actor = mapper.Map<Actor>(actorCreacionDTO);
-            context.Add(actor);
+            var profesional = mapper.Map<Profesional>(profesionalCreacionDTO);
+            context.Add(profesional);
             await context.SaveChangesAsync();
             return Ok();
         }

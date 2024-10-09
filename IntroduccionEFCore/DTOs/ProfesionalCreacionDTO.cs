@@ -2,7 +2,7 @@
 
 namespace IntroduccionEFCore.DTOs
 {
-    public class ActorCreacionDTO
+    public class ProfesionalCreacionDTO
     {
         [StringLength(maximumLength: 150)]
         public string Nombre { get; set; } = null!;

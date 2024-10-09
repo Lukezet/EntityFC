@@ -4,9 +4,9 @@ using System.Reflection.Emit;
 
 namespace IntroduccionEFCore.Entidades.Configuraciones
 {
-    public class PeliculaConfig : IEntityTypeConfiguration<Pelicula>
+    public class PrestadorConfig : IEntityTypeConfiguration<Prestador>
     {
-        public void Configure(EntityTypeBuilder<Pelicula> builder)
+        public void Configure(EntityTypeBuilder<Prestador> builder)
         {
             builder.Property(g => g.FechaEstreno).HasColumnType("datetime");
         }

@@ -1,8 +1,8 @@
 ﻿namespace IntroduccionEFCore.DTOs
 {
-    public class PeliculaActorCreacionDTO
+    public class PrestadorProfesionalCreacionDTO
     {
-        public int ActorId { get; set; }
+        public int ProfesionalId { get; set; }
         public string Personaje { get; set; } = null!;
     }
 }

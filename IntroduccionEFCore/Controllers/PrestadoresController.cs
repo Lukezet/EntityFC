@@ -7,39 +7,39 @@ using Microsoft.EntityFrameworkCore;
 namespace IntroduccionEFCore.Controllers
 {
     [ApiController]
-    [Route("api/peliculas")]
-    public class PeliculasController: ControllerBase
+    [Route("api/prestadores")]
+    public class PrestadoresController: ControllerBase
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
 
-        public PeliculasController(ApplicationDbContext context,IMapper mapper)
+        public PrestadoresController(ApplicationDbContext context,IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
         }
         [HttpPost]
-        public async Task<ActionResult> Post(PeliculaCreacionDTO peliculaCreacionDTO) 
+        public async Task<ActionResult> Post(PrestadorCreacionDTO prestadorCreacionDTO) 
         {
-            var pelicula = mapper.Map<Pelicula>(peliculaCreacionDTO);
-            if (pelicula.Servicios is not null) 
+            var prestador = mapper.Map<Prestador>(prestadorCreacionDTO);
+            if (prestador.Servicios is not null) 
             {
-                foreach (var servicio in pelicula.Servicios) 
+                foreach (var servicio in prestador.Servicios) 
                 {
                     context.Entry(servicio).State = EntityState.Unchanged;//ESTO HAY QUE HACERLO porq estamos utilizando la configuracion de muchos a
                                                                         //muchos saltandnos la parte de control de la tabla intermedia
                 }
             }
 
-            if (pelicula.PeliculasActores is not null) 
+            if (prestador.PrestadoresProfesionales is not null) 
             { 
-                for (int i = 0; i < pelicula.PeliculasActores.Count; i++) 
+                for (int i = 0; i < prestador.PrestadoresProfesionales.Count; i++) 
                 {
-                    pelicula.PeliculasActores[i].Orden = i + 1;
+                    prestador.PrestadoresProfesionales[i].Orden = i + 1;
                 }
 
             }
-            context.Add(pelicula);
+            context.Add(prestador);
             await context.SaveChangesAsync();
             return Ok();
         }

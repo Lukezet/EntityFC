@@ -10,7 +10,7 @@ namespace IntroduccionEFCore.Entidades
         //[StringLength(maximumLength:150)] //otro Ejemplo de Anotacion de datos
         public string Nombre { get; set; } = null!;
 
-        public HashSet<Pelicula> Peliculas { get; set; } = new HashSet<Pelicula>();
+        public HashSet<Prestador> Prestadores { get; set; } = new HashSet<Prestador>();
     }
 }
 //por convencion si se usa Id se tomará como primary key 

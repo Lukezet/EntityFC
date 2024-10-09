@@ -9,11 +9,11 @@ namespace IntroduccionEFCore.Utilidades
         public AutoMapperProfiles()
         {
             CreateMap<ServicioCreacionDTO, Servicio>();
-            CreateMap<ActorCreacionDTO, Actor>();
-            CreateMap<PeliculaCreacionDTO, Pelicula>()
+            CreateMap<ProfesionalCreacionDTO, Profesional>();
+            CreateMap<PrestadorCreacionDTO, Prestador>()
                 .ForMember(ent => ent.Servicios, dto => 
                 dto.MapFrom(campo => campo.Servicios.Select(id => new Servicio { Id = id })));
-            CreateMap<PeliculaActorCreacionDTO, PeliculaActor>();
+            CreateMap<PrestadorProfesionalCreacionDTO, PrestadorProfesional>();
             CreateMap<ComentarioCreacionDTO, Comentario>();
 
         }

@@ -4,6 +4,7 @@ using IntroduccionEFCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IntroduccionEFCore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241009002258_AddingPrestadores")]
+    partial class AddingPrestadores
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,31 @@ namespace IntroduccionEFCore.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("IntroduccionEFCore.Entidades.Actor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("FechaNacimiento")
+                        .HasColumnType("datetime");
+
+                    b.Property<decimal>("Fortuna")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Actores");
+                });
 
             modelBuilder.Entity("IntroduccionEFCore.Entidades.Comentario", b =>
                 {
@@ -71,9 +99,9 @@ namespace IntroduccionEFCore.Migrations
                     b.ToTable("Prestadores");
                 });
 
-            modelBuilder.Entity("IntroduccionEFCore.Entidades.PrestadorProfesional", b =>
+            modelBuilder.Entity("IntroduccionEFCore.Entidades.PrestadorActor", b =>
                 {
-                    b.Property<int>("ProfesionalId")
+                    b.Property<int>("ActorId")
                         .HasColumnType("int");
 
                     b.Property<int>("PrestadorId")
@@ -87,36 +115,11 @@ namespace IntroduccionEFCore.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.HasKey("ProfesionalId", "PrestadorId");
+                    b.HasKey("ActorId", "PrestadorId");
 
                     b.HasIndex("PrestadorId");
 
-                    b.ToTable("PrestadoresProfesionales");
-                });
-
-            modelBuilder.Entity("IntroduccionEFCore.Entidades.Profesional", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("FechaNacimiento")
-                        .HasColumnType("datetime");
-
-                    b.Property<decimal>("Fortuna")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Profesionales");
+                    b.ToTable("PrestadoresActores");
                 });
 
             modelBuilder.Entity("IntroduccionEFCore.Entidades.Servicio", b =>
@@ -175,23 +178,23 @@ namespace IntroduccionEFCore.Migrations
                     b.Navigation("Prestador");
                 });
 
-            modelBuilder.Entity("IntroduccionEFCore.Entidades.PrestadorProfesional", b =>
+            modelBuilder.Entity("IntroduccionEFCore.Entidades.PrestadorActor", b =>
                 {
+                    b.HasOne("IntroduccionEFCore.Entidades.Actor", "Actor")
+                        .WithMany("PrestadoressActores")
+                        .HasForeignKey("ActorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("IntroduccionEFCore.Entidades.Prestador", "Prestador")
-                        .WithMany("PrestadoresProfesionales")
+                        .WithMany("PrestadoresActores")
                         .HasForeignKey("PrestadorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("IntroduccionEFCore.Entidades.Profesional", "Profesional")
-                        .WithMany("PrestadoresProfesionales")
-                        .HasForeignKey("ProfesionalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Actor");
 
                     b.Navigation("Prestador");
-
-                    b.Navigation("Profesional");
                 });
 
             modelBuilder.Entity("PrestadorServicio", b =>
@@ -209,16 +212,16 @@ namespace IntroduccionEFCore.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("IntroduccionEFCore.Entidades.Actor", b =>
+                {
+                    b.Navigation("PrestadoressActores");
+                });
+
             modelBuilder.Entity("IntroduccionEFCore.Entidades.Prestador", b =>
                 {
                     b.Navigation("Comentarios");
 
-                    b.Navigation("PrestadoresProfesionales");
-                });
-
-            modelBuilder.Entity("IntroduccionEFCore.Entidades.Profesional", b =>
-                {
-                    b.Navigation("PrestadoresProfesionales");
+                    b.Navigation("PrestadoresActores");
                 });
 #pragma warning restore 612, 618
         }

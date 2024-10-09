@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace IntroduccionEFCore.Controllers
 {
     [ApiController]
-    [Route("api/peliculas/{peliculaId:int}/comentarios")]
+    [Route("api/prestadores/{prestadorId:int}/comentarios")]
     public class ComentariosController : ControllerBase
     {
         private readonly ApplicationDbContext context;
@@ -20,11 +20,11 @@ namespace IntroduccionEFCore.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(int peliculaId,
+        public async Task<ActionResult> Post(int prestadorId,
             ComentarioCreacionDTO comentarioCreacionDTO)
         {
             var comentario = mapper.Map<Comentario>(comentarioCreacionDTO);
-            comentario.PeliculaId = peliculaId;
+            comentario.PrestadorId = prestadorId;
             context.Add(comentario);
             await context.SaveChangesAsync();
             return Ok();
