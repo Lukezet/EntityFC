@@ -1,6 +1,6 @@
-﻿using IntroduccionEFCore.Entidades;
+﻿using ServicaDB.Entidades;
 
-namespace IntroduccionEFCore.DTOs
+namespace ServicaDB.DTOs
 {
     public class PrestadorCreacionDTO
     {

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using IntroduccionEFCore.DTOs;
-using IntroduccionEFCore.Entidades;
+using ServicaDB.DTOs;
+using ServicaDB.Entidades;
 using Microsoft.AspNetCore.Mvc;
 
-namespace IntroduccionEFCore.Controllers
+namespace ServicaDB.Controllers
 {
     [ApiController]
     [Route("api/Profesionales")]

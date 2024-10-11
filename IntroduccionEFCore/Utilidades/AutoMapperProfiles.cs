@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using IntroduccionEFCore.DTOs;
-using IntroduccionEFCore.Entidades;
+using ServicaDB.DTOs;
+using ServicaDB.Entidades;
 
-namespace IntroduccionEFCore.Utilidades
+namespace ServicaDB.Utilidades
 {
     public class AutoMapperProfiles : Profile
     {

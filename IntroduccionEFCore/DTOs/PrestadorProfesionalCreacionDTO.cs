@@ -1,4 +1,4 @@
-﻿namespace IntroduccionEFCore.DTOs
+﻿namespace ServicaDB.DTOs
 {
     public class PrestadorProfesionalCreacionDTO
     {

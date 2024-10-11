@@ -1,4 +1,4 @@
-﻿namespace IntroduccionEFCore.Entidades
+﻿namespace ServicaDB.Entidades
 {
     public class Prestador
     {

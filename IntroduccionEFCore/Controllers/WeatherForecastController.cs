@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace IntroduccionEFCore.Controllers
+namespace ServicaDB.Controllers
 {
     [ApiController]
     [Route("[controller]")]

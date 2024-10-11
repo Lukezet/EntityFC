@@ -1,8 +1,8 @@
-﻿namespace IntroduccionEFCore.DTOs
+﻿namespace ServicaDB.DTOs
 {
     public class ComentarioCreacionDTO
     {
         public string? Contenido { get; set; } = null!;
-        public bool Recomendar { get; set; }
+        public int Calificacion { get; set; }
     }
 }

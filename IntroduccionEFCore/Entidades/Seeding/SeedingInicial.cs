@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace IntroduccionEFCore.Entidades.Seeding
+namespace ServicaDB.Entidades.Seeding
 {
     public class SeedingInicial
     {

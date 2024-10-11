@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace IntroduccionEFCore.DTOs
+namespace ServicaDB.DTOs
 {
     public class ServicioCreacionDTO
     {

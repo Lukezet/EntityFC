@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Reflection.Emit;
 
-namespace IntroduccionEFCore.Entidades.Configuraciones
+namespace ServicaDB.Entidades.Configuraciones
 {
     public class ProfesionalConfig : IEntityTypeConfiguration<Profesional>
     {

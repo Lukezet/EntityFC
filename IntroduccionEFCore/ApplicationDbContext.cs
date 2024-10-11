@@ -1,8 +1,8 @@
-﻿using IntroduccionEFCore.Entidades;
+﻿using ServicaDB.Entidades;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace IntroduccionEFCore
+namespace ServicaDB
 {
     public class ApplicationDbContext : DbContext
     {

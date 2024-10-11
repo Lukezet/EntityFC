@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServicaDB;
 
@@ -10,9 +11,11 @@ using ServicaDB;
 namespace IntroduccionEFCore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241010005707_InitialCreateMySQL1")]
+    partial class InitialCreateMySQL1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,16 +43,15 @@ namespace IntroduccionEFCore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("Calificacion")
-                        .HasMaxLength(10)
-                        .HasColumnType("int");
-
                     b.Property<string>("Contenido")
                         .HasMaxLength(300)
                         .HasColumnType("varchar(300)");
 
                     b.Property<int>("PrestadorId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("Recomendar")
+                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
 

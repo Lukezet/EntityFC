@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace IntroduccionEFCore.Entidades.Configuraciones
+namespace ServicaDB.Entidades.Configuraciones
 {
     public class PrestadorProfesionalConfig : IEntityTypeConfiguration<PrestadorProfesional>
     {

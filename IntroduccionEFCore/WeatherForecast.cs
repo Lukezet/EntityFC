@@ -1,4 +1,4 @@
-namespace IntroduccionEFCore
+namespace ServicaDB
 {
     public class WeatherForecast
     {
