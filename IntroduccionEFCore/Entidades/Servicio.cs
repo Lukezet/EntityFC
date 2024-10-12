@@ -9,7 +9,7 @@ namespace ServicaDB.Entidades
         public int Id { get; set; }
         //[StringLength(maximumLength:150)] //otro Ejemplo de Anotacion de datos
         public string Nombre { get; set; } = null!;
-
+        public string? Logo { get; set; }
         public HashSet<Prestador> Prestadores { get; set; } = new HashSet<Prestador>();
     }
 }

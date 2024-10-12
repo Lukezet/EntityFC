@@ -30,15 +30,7 @@ namespace ServicaDB.Controllers
                                                                         //muchos saltandnos la parte de control de la tabla intermedia
                 }
             }
-
-            if (prestador.PrestadoresProfesionales is not null) 
-            { 
-                for (int i = 0; i < prestador.PrestadoresProfesionales.Count; i++) 
-                {
-                    prestador.PrestadoresProfesionales[i].Orden = i + 1;
-                }
-
-            }
+            prestador.FechaCrea = DateTime.Now;
             context.Add(prestador);
             await context.SaveChangesAsync();
             return Ok();

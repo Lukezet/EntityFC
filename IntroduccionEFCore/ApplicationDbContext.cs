@@ -1,6 +1,7 @@
 ﻿using ServicaDB.Entidades;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using IntroduccionEFCore.Entidades;
 
 namespace ServicaDB
 {
@@ -28,6 +29,7 @@ namespace ServicaDB
         public DbSet<Profesional> Profesionales => Set<Profesional>();
         public DbSet<Prestador> Prestadores => Set<Prestador>();
         public DbSet<Comentario> Comentarios => Set<Comentario>();
-        public DbSet<PrestadorProfesional> PrestadoresProfesionales => Set<PrestadorProfesional>();
+        public DbSet<Usuario> Usuarios => Set<Usuario>();
+
     }
 }

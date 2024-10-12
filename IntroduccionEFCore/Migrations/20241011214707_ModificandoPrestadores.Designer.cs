@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServicaDB;
 
@@ -10,52 +11,16 @@ using ServicaDB;
 namespace IntroduccionEFCore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241011214707_ModificandoPrestadores")]
+    partial class ModificandoPrestadores
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("IntroduccionEFCore.Entidades.Usuario", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Contraseña")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("varchar(150)");
-
-                    b.Property<string>("Correo")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("varchar(150)");
-
-                    b.Property<DateTime>("FechaAnula")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("NombreUsuario")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("varchar(150)");
-
-                    b.Property<int?>("ProfesionalId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProfesionalId")
-                        .IsUnique();
-
-                    b.ToTable("Usuarios", (string)null);
-                });
 
             modelBuilder.Entity("PrestadorServicio", b =>
                 {
@@ -100,53 +65,43 @@ namespace IntroduccionEFCore.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(1);
+                        .HasColumnType("int");
 
                     b.Property<string>("Descripcion")
                         .HasMaxLength(300)
-                        .HasColumnType("varchar(300)")
-                        .HasColumnOrder(10);
+                        .HasColumnType("varchar(300)");
 
                     b.Property<string>("Direccion")
                         .HasMaxLength(150)
-                        .HasColumnType("varchar(150)")
-                        .HasColumnOrder(5);
+                        .HasColumnType("varchar(150)");
 
                     b.Property<string>("Eslogan")
                         .HasMaxLength(150)
-                        .HasColumnType("varchar(150)")
-                        .HasColumnOrder(3);
+                        .HasColumnType("varchar(150)");
 
                     b.Property<DateTime>("FechaAnula")
-                        .HasColumnType("datetime")
-                        .HasColumnOrder(7);
+                        .HasColumnType("datetime");
 
                     b.Property<DateTime>("FechaCrea")
-                        .HasColumnType("datetime")
-                        .HasColumnOrder(6);
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("varchar(150)")
-                        .HasColumnOrder(2);
+                        .HasColumnType("varchar(150)");
 
                     b.Property<string>("Pais")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("varchar(150)")
-                        .HasColumnOrder(9);
+                        .HasColumnType("varchar(150)");
 
                     b.Property<string>("Provincia")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("varchar(150)")
-                        .HasColumnOrder(8);
+                        .HasColumnType("varchar(150)");
 
-                    b.Property<long>("Telefono")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(4);
+                    b.Property<int>("Telefono")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -157,38 +112,31 @@ namespace IntroduccionEFCore.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnOrder(1);
+                        .HasColumnType("int");
 
                     b.Property<string>("Descripcion")
                         .HasMaxLength(150)
-                        .HasColumnType("varchar(150)")
-                        .HasColumnOrder(5);
+                        .HasColumnType("varchar(150)");
 
                     b.Property<DateTime>("FechaAnula")
-                        .HasColumnType("datetime")
-                        .HasColumnOrder(7);
+                        .HasColumnType("datetime");
 
                     b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("datetime")
-                        .HasColumnOrder(6);
+                        .HasColumnType("datetime");
 
                     b.Property<int?>("IdentificadorNacional")
-                        .HasColumnType("int")
-                        .HasColumnOrder(3);
+                        .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("varchar(150)")
-                        .HasColumnOrder(2);
+                        .HasColumnType("varchar(150)");
 
                     b.Property<int>("PrestadorId")
                         .HasColumnType("int");
 
-                    b.Property<long?>("Telefono")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(4);
+                    b.Property<int?>("Telefono")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -215,16 +163,6 @@ namespace IntroduccionEFCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Servicios");
-                });
-
-            modelBuilder.Entity("IntroduccionEFCore.Entidades.Usuario", b =>
-                {
-                    b.HasOne("ServicaDB.Entidades.Profesional", "Profesional")
-                        .WithOne("Usuario")
-                        .HasForeignKey("IntroduccionEFCore.Entidades.Usuario", "ProfesionalId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("Profesional");
                 });
 
             modelBuilder.Entity("PrestadorServicio", b =>
@@ -267,11 +205,6 @@ namespace IntroduccionEFCore.Migrations
             modelBuilder.Entity("ServicaDB.Entidades.Prestador", b =>
                 {
                     b.Navigation("Comentarios");
-                });
-
-            modelBuilder.Entity("ServicaDB.Entidades.Profesional", b =>
-                {
-                    b.Navigation("Usuario");
                 });
 #pragma warning restore 612, 618
         }

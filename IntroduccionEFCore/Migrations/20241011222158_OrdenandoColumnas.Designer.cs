@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServicaDB;
 
@@ -10,52 +11,16 @@ using ServicaDB;
 namespace IntroduccionEFCore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241011222158_OrdenandoColumnas")]
+    partial class OrdenandoColumnas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.6")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("IntroduccionEFCore.Entidades.Usuario", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Contraseña")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("varchar(150)");
-
-                    b.Property<string>("Correo")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("varchar(150)");
-
-                    b.Property<DateTime>("FechaAnula")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("NombreUsuario")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("varchar(150)");
-
-                    b.Property<int?>("ProfesionalId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProfesionalId")
-                        .IsUnique();
-
-                    b.ToTable("Usuarios", (string)null);
-                });
 
             modelBuilder.Entity("PrestadorServicio", b =>
                 {
@@ -217,16 +182,6 @@ namespace IntroduccionEFCore.Migrations
                     b.ToTable("Servicios");
                 });
 
-            modelBuilder.Entity("IntroduccionEFCore.Entidades.Usuario", b =>
-                {
-                    b.HasOne("ServicaDB.Entidades.Profesional", "Profesional")
-                        .WithOne("Usuario")
-                        .HasForeignKey("IntroduccionEFCore.Entidades.Usuario", "ProfesionalId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("Profesional");
-                });
-
             modelBuilder.Entity("PrestadorServicio", b =>
                 {
                     b.HasOne("ServicaDB.Entidades.Prestador", null)
@@ -267,11 +222,6 @@ namespace IntroduccionEFCore.Migrations
             modelBuilder.Entity("ServicaDB.Entidades.Prestador", b =>
                 {
                     b.Navigation("Comentarios");
-                });
-
-            modelBuilder.Entity("ServicaDB.Entidades.Profesional", b =>
-                {
-                    b.Navigation("Usuario");
                 });
 #pragma warning restore 612, 618
         }

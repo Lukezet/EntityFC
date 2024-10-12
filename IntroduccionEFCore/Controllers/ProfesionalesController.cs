@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ServicaDB.Controllers
 {
     [ApiController]
-    [Route("api/Profesionales")]
+    [Route("api/Profesionales/{prestadorId:int}")]
     public class ProfesionalesController : ControllerBase
     {
         private readonly ApplicationDbContext context;
@@ -18,12 +18,22 @@ namespace ServicaDB.Controllers
             this.mapper = mapper;
         }
         [HttpPost]
-        public async Task<ActionResult> Post(ProfesionalCreacionDTO profesionalCreacionDTO) 
+        public async Task<ActionResult> Post(int prestadorId, ProfesionalCreacionDTO profesionalCreacionDTO)
         {
-            var profesional = mapper.Map<Profesional>(profesionalCreacionDTO);
-            context.Add(profesional);
-            await context.SaveChangesAsync();
-            return Ok();
+            try
+            {
+                var profesional = mapper.Map<Profesional>(profesionalCreacionDTO);
+                profesional.PrestadorId = prestadorId;
+                profesional.FechaCreacion = DateTime.Now;
+                context.Add(profesional);
+                await context.SaveChangesAsync();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                // Registrar el error o manejarlo adecuadamente
+                return StatusCode(500, $"Error al crear profesional: {ex.Message}");
+            }
         }
     }
 }

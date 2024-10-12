@@ -6,7 +6,8 @@ namespace ServicaDB.DTOs
     {
         [StringLength(maximumLength: 150)]
         public string Nombre { get; set; } = null!;
-        public decimal Fortuna { get; set; }
-        public DateTime FechaNacimiento { get; set; }
+        public int? IdentificadorNacional { get; set; }
+        public long? Telefono { get; set; }
+        public string? Descripcion { get; set; }
     }
 }

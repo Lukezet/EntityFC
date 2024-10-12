@@ -11,7 +11,7 @@ namespace ServicaDB.Entidades.Configuraciones
             //var cienciaFiccion = new Servicio { Id = 5, Nombre = "Ciencia Ficcion" };
             //var animacion = new Servicio { Id = 6, Nombre = "Animacion" };
             //builder.HasData(cienciaFiccion, animacion);
-
+            builder.Property(g => g.Logo).HasMaxLength(500);
 
         }
     }
