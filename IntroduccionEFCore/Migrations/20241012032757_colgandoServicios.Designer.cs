@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServicaDB;
 
@@ -10,9 +11,11 @@ using ServicaDB;
 namespace IntroduccionEFCore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241012032757_colgandoServicios")]
+    partial class colgandoServicios
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -126,10 +129,6 @@ namespace IntroduccionEFCore.Migrations
                         .HasColumnType("datetime")
                         .HasColumnOrder(6);
 
-                    b.Property<string>("ImgPrestador")
-                        .HasMaxLength(300)
-                        .HasColumnType("varchar(300)");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -141,10 +140,6 @@ namespace IntroduccionEFCore.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("varchar(150)")
                         .HasColumnOrder(9);
-
-                    b.Property<string>("PortadaImg")
-                        .HasMaxLength(300)
-                        .HasColumnType("varchar(300)");
 
                     b.Property<string>("Provincia")
                         .IsRequired()
@@ -185,10 +180,6 @@ namespace IntroduccionEFCore.Migrations
                         .HasColumnType("int")
                         .HasColumnOrder(3);
 
-                    b.Property<string>("ImgProfesional")
-                        .HasMaxLength(300)
-                        .HasColumnType("varchar(300)");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -226,76 +217,62 @@ namespace IntroduccionEFCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Nombre")
-                        .IsUnique();
-
                     b.ToTable("Servicios");
 
                     b.HasData(
                         new
                         {
                             Id = 9,
-                            Logo = "./src/assets/mop.png",
                             Nombre = "Limpieza"
                         },
                         new
                         {
                             Id = 10,
-                            Logo = "./src/assets/gardener.png",
                             Nombre = "Jardinería"
                         },
                         new
                         {
                             Id = 11,
-                            Logo = "./src/assets/carpenter.png",
                             Nombre = "Carpintería"
                         },
                         new
                         {
                             Id = 12,
-                            Logo = "./src/assets/paint-roller.png",
                             Nombre = "Pintura"
                         },
                         new
                         {
                             Id = 13,
-                            Logo = "./src/assets/bricklayer.png",
                             Nombre = "Albañilería"
                         },
                         new
                         {
                             Id = 14,
-                            Logo = "./src/assets/locksmith.png",
                             Nombre = "Cerrajería"
                         },
                         new
                         {
                             Id = 15,
-                            Logo = "./src/assets/appliance-repair.png",
                             Nombre = "Reparación de Electrodomésticos"
                         },
                         new
                         {
                             Id = 16,
-                            Logo = "./src/assets/nanny.png",
-                            Nombre = "Niñeras"
+                            Nombre = "Mantenimiento de Piscinas"
                         },
                         new
                         {
                             Id = 17,
-                            Logo = "./src/assets/insurance.png",
                             Nombre = "Alarmas y Seguridad"
                         },
                         new
                         {
                             Id = 18,
-                            Logo = "./src/assets/vet.png",
-                            Nombre = "Veterinaria"
+                            Nombre = "Instalación y reparacion de Aires Acondicionados"
                         },
                         new
                         {
                             Id = 19,
-                            Logo = "./src/assets/moving-truck.png",
                             Nombre = "Mudanzas"
                         });
                 });
@@ -339,7 +316,7 @@ namespace IntroduccionEFCore.Migrations
             modelBuilder.Entity("ServicaDB.Entidades.Profesional", b =>
                 {
                     b.HasOne("ServicaDB.Entidades.Prestador", "Prestador")
-                        .WithMany("Profesionales")
+                        .WithMany()
                         .HasForeignKey("PrestadorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -350,8 +327,6 @@ namespace IntroduccionEFCore.Migrations
             modelBuilder.Entity("ServicaDB.Entidades.Prestador", b =>
                 {
                     b.Navigation("Comentarios");
-
-                    b.Navigation("Profesionales");
                 });
 
             modelBuilder.Entity("ServicaDB.Entidades.Profesional", b =>

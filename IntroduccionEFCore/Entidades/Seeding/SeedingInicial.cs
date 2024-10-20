@@ -4,7 +4,7 @@ namespace ServicaDB.Entidades.Seeding
 {
     public class SeedingInicial
     {
-        public static void Seed(ModelBuilder modelbuilder) 
+        public static void Seed(ModelBuilder modelbuilder)
         {
             //var RobertDeNiro = new Profesional() 
             //{ 
@@ -21,6 +21,7 @@ namespace ServicaDB.Entidades.Seeding
             //    Fortuna = 12000000
             //};
             //modelbuilder.Entity<Profesional>().HasData(RobertDeNiro);
+
         }
     }
 }

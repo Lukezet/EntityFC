@@ -10,6 +10,8 @@ namespace ServicaDB.DTOs
         public string? Direccion { get; set; }
         public string Provincia { get; set; } = null!;
         public string Pais { get; set; } = null!;
+        public string? ImgPrestador { get; set; }
+        public string? PortadaImg { get; set; }
         public string? Descripcion { get; set; }
         public List<int> Servicios { get; set; } = new List<int>();//hacemos una lista de int ya que sera la lista de ids de servicio
                 

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServicaDB;
 
@@ -10,9 +11,11 @@ using ServicaDB;
 namespace IntroduccionEFCore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241016224012_prueba2")]
+    partial class prueba2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -126,10 +129,6 @@ namespace IntroduccionEFCore.Migrations
                         .HasColumnType("datetime")
                         .HasColumnOrder(6);
 
-                    b.Property<string>("ImgPrestador")
-                        .HasMaxLength(300)
-                        .HasColumnType("varchar(300)");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -141,10 +140,6 @@ namespace IntroduccionEFCore.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("varchar(150)")
                         .HasColumnOrder(9);
-
-                    b.Property<string>("PortadaImg")
-                        .HasMaxLength(300)
-                        .HasColumnType("varchar(300)");
 
                     b.Property<string>("Provincia")
                         .IsRequired()
@@ -184,10 +179,6 @@ namespace IntroduccionEFCore.Migrations
                     b.Property<int?>("IdentificadorNacional")
                         .HasColumnType("int")
                         .HasColumnOrder(3);
-
-                    b.Property<string>("ImgProfesional")
-                        .HasMaxLength(300)
-                        .HasColumnType("varchar(300)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()

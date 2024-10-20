@@ -10,6 +10,7 @@ namespace ServicaDB.Entidades.Configuraciones
         {
             builder.Property(g => g.FechaCreacion).HasColumnType("datetime");
             builder.Property(g => g.FechaAnula).HasColumnType("datetime");
+            builder.Property(g => g.ImgProfesional).HasMaxLength(300);
 
             builder.Property(p => p.Id).HasColumnOrder(1);
             builder.Property(p => p.Nombre).HasColumnOrder(2);

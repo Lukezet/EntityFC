@@ -12,6 +12,8 @@ namespace ServicaDB.Utilidades
         {
             CreateMap<ServicioCreacionDTO, Servicio>();
             CreateMap<ProfesionalCreacionDTO, Profesional>();
+            CreateMap<Profesional, ProfesionalDTO>();
+            CreateMap<Prestador, PrestadorDTO>();
             CreateMap<PrestadorCreacionDTO, Prestador>()
                 .ForMember(ent => ent.Servicios, dto => 
                 dto.MapFrom(campo => campo.Servicios.Select(id => new Servicio { Id = id })));
