@@ -4,5 +4,6 @@
     {
         public string? Contenido { get; set; } = null!;
         public int Calificacion { get; set; }
+        public int UsuarioId { get; set; }
     }
 }

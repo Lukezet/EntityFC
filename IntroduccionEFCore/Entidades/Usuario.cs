@@ -14,5 +14,7 @@ namespace IntroduccionEFCore.Entidades
         // Relación uno a uno con Profesional
         public int? ProfesionalId { get; set; }
         public Profesional? Profesional { get; set; }
+
+        public HashSet<Comentario> Comentarios { get; set; } = new HashSet<Comentario>();
     }
 }

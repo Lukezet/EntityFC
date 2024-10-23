@@ -19,17 +19,25 @@ namespace ServicaDB.Controllers
             this.mapper = mapper;
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Post(int prestadorId,
-            ComentarioCreacionDTO comentarioCreacionDTO)
-        {
-            var comentario = mapper.Map<Comentario>(comentarioCreacionDTO);
-            comentario.PrestadorId = prestadorId;
-            context.Add(comentario);
-            await context.SaveChangesAsync();
-            return Ok();
+[HttpPost]
+public async Task<ActionResult> Post(int prestadorId, ComentarioCreacionDTO comentarioCreacionDTO)
+{
+    var comentario = mapper.Map<Comentario>(comentarioCreacionDTO);
+    
+    // Asigna el prestador
+    comentario.PrestadorId = prestadorId;
 
-        }
+    // Obtén el UsuarioId del contexto de la autenticación (si usas JWT o Identity)
+    //var usuarioId = int.Parse(User.FindFirst("id").Value);
+    //comentario.UsuarioId = usuarioId;
+
+     //Alternativamente, podrías recibir el UsuarioId directamente en el DTO si no usas autenticación
+     comentario.UsuarioId = comentarioCreacionDTO.UsuarioId;
+     comentario.FechaCrea = DateTime.Now;
+     context.Add(comentario);
+    await context.SaveChangesAsync();
+    return Ok();
+}
         
     }
 }

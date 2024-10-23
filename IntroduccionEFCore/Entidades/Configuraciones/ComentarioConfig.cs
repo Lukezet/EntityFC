@@ -9,6 +9,8 @@ namespace ServicaDB.Entidades.Configuraciones
         {
             builder.Property(g => g.Contenido).HasMaxLength(300);
             builder.Property(g => g.Calificacion).HasMaxLength(10);
+            builder.Property(g => g.FechaCrea).HasColumnType("datetime");
+            builder.Property(g => g.FechaAnula).HasColumnType("datetime");
         }
     }
 }
