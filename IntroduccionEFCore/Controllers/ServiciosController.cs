@@ -4,6 +4,7 @@ using ServicaDB.Entidades;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ServicaDB.Controllers
 {
@@ -21,6 +22,7 @@ namespace ServicaDB.Controllers
             this.mapper = mapper;
         }
 
+        //[Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Servicio>>> Get()
         {
