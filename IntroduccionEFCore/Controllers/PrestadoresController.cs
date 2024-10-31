@@ -26,16 +26,27 @@ namespace ServicaDB.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Prestador>> Get(int id)
-        {
-            var prestador = await context.Prestadores
-                .Include(p => p.Comentarios)
-                .Include(p => p.Servicios)
-                .Include(p => p.Profesionales)
-                .FirstOrDefaultAsync( p => p.Id == id);
+        public async Task<ActionResult<object>> Get(int id)
+{
+        var prestador = await context.Prestadores
+        .Include(p => p.Comentarios)
+        .Include(p => p.Servicios)
+        .Include(p => p.Profesionales)
+        .FirstOrDefaultAsync(p => p.Id == id);
 
-            return prestador == null ? NotFound() : Ok(prestador);
+        if (prestador == null) return NotFound();
 
+            // Calcular el promedio de calificación de los comentarios
+            var promedioCalificacion = prestador.Comentarios.Any()
+                ? Math.Round(prestador.Comentarios.Average(c => c.Calificacion), 1)
+                : 0;
+
+            // Devolver el prestador y el promedio de calificación en un nuevo objeto anónimo
+            return Ok(new
+            {
+              Prestador = prestador,
+              PromedioCalificacion = promedioCalificacion
+            });
         }
         [HttpGet("select/{id:int}")]
         public async Task<ActionResult<Prestador>> GetSelect(int id)
@@ -78,15 +89,9 @@ namespace ServicaDB.Controllers
                                                p.Eslogan,
                                                p.Telefono,
                                                p.Direccion,
-                                               p.FechaCrea,
-                                               p.FechaAnula,
-                                               p.Provincia,
-                                               p.Pais,
                                                p.ImgPrestador,
-                                               p.PortadaImg,
-                                               p.Descripcion,
                                                // Calcula el promedio de calificaciones
-                                               PromedioCalificacion = p.Comentarios.Any() ? p.Comentarios.Average(c => c.Calificacion) : (double?)null,
+                                               PromedioCalificacion = p.Comentarios.Any() ? p.Comentarios.Average(c => c.Calificacion) : (decimal?)null,
                                                Servicios = p.Servicios.Select(s => new
                                                {
                                                    s.Id,

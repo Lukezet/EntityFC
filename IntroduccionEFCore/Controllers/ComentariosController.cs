@@ -3,6 +3,7 @@ using ServicaDB.DTOs;
 using ServicaDB.Entidades;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ServicaDB.Controllers
 {
@@ -18,7 +19,7 @@ namespace ServicaDB.Controllers
             this.context = context;
             this.mapper = mapper;
         }
-
+[Authorize]
 [HttpPost]
 public async Task<ActionResult> Post(int prestadorId, ComentarioCreacionDTO comentarioCreacionDTO)
 {
@@ -27,12 +28,10 @@ public async Task<ActionResult> Post(int prestadorId, ComentarioCreacionDTO come
     // Asigna el prestador
     comentario.PrestadorId = prestadorId;
 
-    // Obtén el UsuarioId del contexto de la autenticación (si usas JWT o Identity)
-    //var usuarioId = int.Parse(User.FindFirst("id").Value);
-    //comentario.UsuarioId = usuarioId;
+            // Obtén el UsuarioId del contexto de la autenticación (si usas JWT o Identity)
+            var usuarioId = int.Parse(User.FindFirst("UsuarioId").Value);
+            comentario.UsuarioId = usuarioId;
 
-     //Alternativamente, podrías recibir el UsuarioId directamente en el DTO si no usas autenticación
-     comentario.UsuarioId = comentarioCreacionDTO.UsuarioId;
      comentario.FechaCrea = DateTime.Now;
      context.Add(comentario);
     await context.SaveChangesAsync();

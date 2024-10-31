@@ -19,6 +19,7 @@ namespace ServicaDB.Utilidades
                 dto.MapFrom(campo => campo.Servicios.Select(id => new Servicio { Id = id })));
             CreateMap<ComentarioCreacionDTO, Comentario>();
             CreateMap<UsuarioCreacionDTO, Usuario>();
+            CreateMap<Usuario, UsuarioLoginDTO>();
         }
     }
 }

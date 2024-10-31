@@ -43,7 +43,8 @@ namespace ServicaDB.Controllers
             }
 
             var token = GenerarTokenJWT(usuario);
-            return Ok(new { Token = token,User = usuario });
+            var usuarioDTO = mapper.Map<UsuarioLoginDTO>(usuario); // Usa el DTO
+            return Ok(new { Token = token,User = usuarioDTO });
         }
 
         private string GenerarTokenJWT(Usuario usuario)

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServicaDB;
 
@@ -10,9 +11,11 @@ using ServicaDB;
 namespace IntroduccionEFCore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241030220405_ComentarioCalificacionDecimal")]
+    partial class ComentarioCalificacionDecimal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,7 +72,7 @@ namespace IntroduccionEFCore.Migrations
 
                     b.HasIndex("ServiciosId");
 
-                    b.ToTable("PrestadorServicio", (string)null);
+                    b.ToTable("PrestadorServicio");
                 });
 
             modelBuilder.Entity("ServicaDB.Entidades.Comentario", b =>
@@ -103,7 +106,7 @@ namespace IntroduccionEFCore.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Comentarios", (string)null);
+                    b.ToTable("Comentarios");
                 });
 
             modelBuilder.Entity("ServicaDB.Entidades.Prestador", b =>
@@ -158,7 +161,7 @@ namespace IntroduccionEFCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Prestadores", (string)null);
+                    b.ToTable("Prestadores");
                 });
 
             modelBuilder.Entity("ServicaDB.Entidades.Profesional", b =>
@@ -206,7 +209,7 @@ namespace IntroduccionEFCore.Migrations
 
                     b.HasIndex("PrestadorId");
 
-                    b.ToTable("Profesionales", (string)null);
+                    b.ToTable("Profesionales");
                 });
 
             modelBuilder.Entity("ServicaDB.Entidades.Servicio", b =>
@@ -229,7 +232,7 @@ namespace IntroduccionEFCore.Migrations
                     b.HasIndex("Nombre")
                         .IsUnique();
 
-                    b.ToTable("Servicios", (string)null);
+                    b.ToTable("Servicios");
 
                     b.HasData(
                         new
