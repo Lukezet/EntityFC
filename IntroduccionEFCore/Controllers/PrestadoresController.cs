@@ -12,11 +12,14 @@ namespace ServicaDB.Controllers
     {
         private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
+        private readonly IConfiguration configuration;
+
 
         public PrestadoresController(ApplicationDbContext context,IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
+            this.configuration = configuration;
         }
 
         [HttpGet]
@@ -127,12 +130,34 @@ namespace ServicaDB.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post(PrestadorCreacionDTO prestadorCreacionDTO) 
+        public async Task<ActionResult> Post(PrestadorCreacionDTO prestadorCreacionDTO)
         {
+
             var prestador = mapper.Map<Prestador>(prestadorCreacionDTO);
-            if (prestador.Servicios is not null) 
+
+          if (prestadorCreacionDTO.ImgPrestador != null)
             {
-                foreach (var servicio in prestador.Servicios) 
+                var imgPrestadorPath = Path.Combine("C:\\Users\\Lucas\\Desktop\\VueApp\\ServicaVue\\public\\PrestadorImg", Guid.NewGuid().ToString() + Path.GetExtension(prestadorCreacionDTO.ImgPrestador.FileName));
+                using (var stream = new FileStream(imgPrestadorPath, FileMode.Create))
+                {
+                    await prestadorCreacionDTO.ImgPrestador.CopyToAsync(stream);
+                }
+                prestador.ImgPrestador = imgPrestadorPath;
+            }
+
+            if (prestadorCreacionDTO.PortadaImg != null)
+            {
+                
+                var portadaImgPath = Path.Combine("C:\\Users\\Lucas\\Desktop\\VueApp\\ServicaVue\\public\\Portadas", Guid.NewGuid().ToString() + Path.GetExtension(prestadorCreacionDTO.PortadaImg.FileName));
+                using (var stream = new FileStream(portadaImgPath, FileMode.Create))
+                {
+                    await prestadorCreacionDTO.PortadaImg.CopyToAsync(stream);
+                }
+                prestador.PortadaImg = portadaImgPath;
+            }
+            if (prestador.Servicios is not null)
+            {
+                foreach (var servicio in prestador.Servicios)
                 {
                     context.Entry(servicio).State = EntityState.Unchanged;//ESTO HAY QUE HACERLO porq estamos utilizando la configuracion de muchos a
                                                                           //muchos saltandnos la parte de control de la tabla intermedia
@@ -141,8 +166,10 @@ namespace ServicaDB.Controllers
             prestador.FechaCrea = DateTime.Now;
             context.Add(prestador);
             await context.SaveChangesAsync();
+
             return Ok();
         }
+
 
         [HttpDelete("{id:int}/formaModerna")]
         public async Task<ActionResult> Delete(int id)
